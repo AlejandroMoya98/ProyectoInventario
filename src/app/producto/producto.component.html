@@ -1,0 +1,21 @@
+<div class="container mt-4">
+        <h4 class="text-center text-primary mb-2"> Insertar producto:</h4>
+        <form class="p-2 border rounded shadow-sm bg-light" (ngSubmit)="crearProducto()">
+            <div class="row g-2 mb-2">
+                <div class="col-md-4">
+                    <label class="form-label">Tipo Producto:</label>
+                    <input class="form-control form-control-sm" [(ngModel)]="nuevoProducto.tipoProducto" name="tipoProducto" required />
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Precio:</label>
+                    <input class="form-control form-control-sm" type="number" [(ngModel)]="nuevoProducto.precio" name="precio" required />
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Cantidad:</label>
+                    <input class="form-control form-control-sm" type="number" [(ngModel)]="nuevoProducto.cantidadProducto" name="cantidadProducto" required />
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary w-100 btn-sm">Agregar Producto</button>
+        </form>
+    
+</div>
