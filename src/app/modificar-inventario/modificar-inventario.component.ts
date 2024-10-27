@@ -7,7 +7,6 @@ import { ServicioProductoService } from '../servicio-producto.service';
   selector: 'app-modificar-inventario',
   standalone: true,
   imports: [FormsModule, CommonModule],
-  providers: [ServicioProductoService], 
   templateUrl: './modificar-inventario.component.html',
   styleUrls: ['./modificar-inventario.component.css']
 })
@@ -25,6 +24,10 @@ export class ModificarInventarioComponent implements OnInit {
   ngOnInit(): void {
     // Inicializamos los productos cuando el componente ya está listo
     this.productos = this.productoService.getProductos();
+  }
+
+  seleccionarProducto(producto: any): void {
+    this.productoSeleccionado = producto;
   }
 
   // Método para buscar un producto por su término de búsqueda

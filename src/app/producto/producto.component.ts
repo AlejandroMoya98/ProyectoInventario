@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component , Output, EventEmitter} from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+//import { ServicioProductoService } from '../servicio-producto.service';
 
 
 //(ngSubmit)="AgregarProducto()
@@ -22,9 +23,11 @@ interface Producto {
 })
 export class ProductoComponent {
 
+  @Output() productoCreado = new EventEmitter<Producto>();
+
   nuevoProducto = { tipoProducto: '', precio: 0, cantidadProducto: 0 };
 
-  @Output() productoCreado: EventEmitter<any> = new EventEmitter<any>();
+  //constructor(private productoService: ServicioProductoService) {}
 
   crearProducto() {
     this.productoCreado.emit(this.nuevoProducto);

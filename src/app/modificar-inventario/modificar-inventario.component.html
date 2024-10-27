@@ -6,6 +6,20 @@
       <input type="text" class="form-control" placeholder="Buscar producto" [(ngModel)]="terminoBusqueda">
       <button class="btn btn-primary mt-2" (click)="buscarProducto()">Buscar</button>
     </div>
+
+    <!-- Mostrar lista completa de productos -->
+  <ul class="list-group">
+    <li 
+      *ngFor="let producto of productos" 
+      (click)="seleccionarProducto(producto)" 
+      class="list-group-item d-flex justify-content-between align-items-center" 
+      [class.active]="producto === productoSeleccionado"
+      style="cursor: pointer;">
+      <span>{{ producto.tipoProducto }}</span>
+      <span>{{ producto.precio | currency:'EUR' }}</span>
+      <span>{{ producto.cantidadProducto }}</span>
+    </li>
+  </ul>
   
     <!-- Mostrar el producto encontrado -->
     <div *ngIf="productoSeleccionado" class="mt-3">

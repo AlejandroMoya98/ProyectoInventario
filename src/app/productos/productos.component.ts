@@ -1,4 +1,4 @@
-import { Component , OnInit, Input} from '@angular/core';
+import { Component , OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ServicioProductoService } from '../servicio-producto.service';
 
@@ -12,23 +12,21 @@ interface Producto {
   selector: 'app-productos',
   standalone: true,
   imports: [CommonModule],
-  providers: [ServicioProductoService],
-
   templateUrl: './productos.component.html',
   styleUrl: './productos.component.css'
 })
 export class ProductosComponent implements OnInit {
  
-  @Input() productos: Producto[] = [];
+  productos: Producto[] = [];
   
-
-  // Inyección del servicio en el constructor
   constructor(private productoService: ServicioProductoService) {}
 
   ngOnInit(): void {
-    // Inicializa los productos usando el servicio cuando el componente está listo
-    //this.productos = this.productoService.getProductos();
+    this.productos = this.productoService.getProductos();
   }
+  
+
+
 
   modificarUnidades(index: number, cantidad: number) {
     try {

@@ -4,5 +4,5 @@ import { HomeComponent } from './home/home.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'modificar', component: ModificarInventarioComponent }
+  { path: 'modificar-inventario', component: ModificarInventarioComponent }
 ];

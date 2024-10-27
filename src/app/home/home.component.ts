@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { ProductosComponent } from '../productos/productos.component';
 import { ProductoComponent } from '../producto/producto.component';
+import { ServicioProductoService } from '../servicio-producto.service';
 
 
 
@@ -34,10 +35,12 @@ export class HomeComponent {
   // recordar usar this. al usar variables y demás creadas en la clase
 
 
-  productos: Producto[] = [];
+  //productos: Producto[] = [];
+
+  constructor(private productoService: ServicioProductoService) {}
 
   agregarProducto(nuevoProducto: Producto) {
-    this.productos.push(nuevoProducto);
+    this.productoService.agregarProducto(nuevoProducto);
   }
   
   title = 'Inventario de productos';

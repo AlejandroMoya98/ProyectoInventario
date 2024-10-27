@@ -15,7 +15,7 @@ export class ServicioProductoService {
 
   private productos: Producto[] = [];
 
-  getProductos() {
+  getProductos(): Producto[]  {
     return this.productos;
   }
 
