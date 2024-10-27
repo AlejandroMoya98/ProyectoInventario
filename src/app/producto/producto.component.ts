@@ -30,8 +30,27 @@ export class ProductoComponent {
   //constructor(private productoService: ServicioProductoService) {}
 
   crearProducto() {
-    this.productoCreado.emit(this.nuevoProducto);
-    this.nuevoProducto = { tipoProducto: '', precio: 0, cantidadProducto: 0 };  // Resetea el formulario
+    if (this.esValido()) {
+      this.productoCreado.emit(this.nuevoProducto);
+      this.nuevoProducto = { tipoProducto: '', precio: 0, cantidadProducto: 0 };  // Resetea el formulario
+    }
+  }
+  esValido(): boolean {
+    return this.nuevoProducto.precio > 0 && Number.isInteger(this.nuevoProducto.cantidadProducto) && this.nuevoProducto.cantidadProducto > 0;
+  }
+
+  validarPrecio() {
+    // Limitar a dos decimales
+    this.nuevoProducto.precio = parseFloat(this.nuevoProducto.precio.toFixed(2));
+    if (this.nuevoProducto.precio <= 0) {
+      this.nuevoProducto.precio = 0.01;  // Valor mínimo permitido
+    }
+  }
+
+  validarCantidad() {
+    if (this.nuevoProducto.cantidadProducto < 1 || !Number.isInteger(this.nuevoProducto.cantidadProducto)) {
+      this.nuevoProducto.cantidadProducto = 1;  // Asegura cantidad mínima
+    }
   }
 
   
