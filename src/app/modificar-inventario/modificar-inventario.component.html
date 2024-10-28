@@ -28,7 +28,7 @@
   
       <!-- Formulario para modificar unidades -->
       <div class="d-flex justify-content-between align-items-center">
-        <input type="number" [(ngModel)]="cantidadModificar" class="form-control w-50" placeholder="Cantidad a modificar">
+        <input type="number" [(ngModel)]="cantidadModificar" class="form-control w-50" placeholder="Cantidad a modificar" min="1" step="1" (input)="validarCantidad()" required>
         <button class="btn btn-success ms-2" (click)="modificarCantidad(cantidadModificar)">Añadir</button>
         <button class="btn btn-danger ms-2" (click)="modificarCantidad(-cantidadModificar)">Eliminar</button>
       </div>

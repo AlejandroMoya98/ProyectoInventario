@@ -36,6 +36,12 @@ export class ModificarInventarioComponent implements OnInit {
     this.productoSeleccionado = resultados.length ? resultados[0] : null;
   }
 
+  validarCantidad() {
+    if (this.cantidadModificar < 1 || !Number.isInteger(this.cantidadModificar)) {
+      this.cantidadModificar = 1;  // Asegura cantidad mínima
+    }
+  }
+
   // Método para modificar la cantidad de productos
   modificarCantidad(cantidad: number): void {
     try {
