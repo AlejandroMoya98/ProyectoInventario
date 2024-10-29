@@ -8,16 +8,16 @@
               <th>Precio</th>
               <th>Cantidad</th>
               <th>Valor total</th>
-              <th>Añadir/Eliminar unidades</th>
+              <th *ngIf="mostrarUltimaColumna">Añadir/Eliminar unidades</th>
           </tr>
       </thead>
       <tbody>
-          <tr *ngFor="let producto of productos ; let i = index" >
+          <tr *ngFor="let producto of productos ; let i = index" (click)="seleccionarProducto(producto)" style="cursor: pointer;" >
               <td>{{ producto.tipoProducto }}</td>
               <td>{{ producto.precio | currency: 'EUR' }}</td>
               <td>{{ producto.cantidadProducto }}</td>
               <td>{{ producto.precio * producto.cantidadProducto | currency: 'EUR' }}</td>
-              <td>
+              <td *ngIf="mostrarUltimaColumna">
                 <div class="d-flex justify-content-center">
                    <button class="btn btn-danger btn-md me-2" (click)="modificarUnidades(i, -1)">-</button>
                    <button class="btn btn-success btn-md" (click)="modificarUnidades(i, 1)">+</button>

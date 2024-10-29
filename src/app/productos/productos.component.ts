@@ -1,4 +1,4 @@
-import { Component , OnInit} from '@angular/core';
+import { Component , Input, Output, EventEmitter, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ServicioProductoService } from '../servicio-producto.service';
 
@@ -16,8 +16,12 @@ interface Producto {
   styleUrl: './productos.component.css'
 })
 export class ProductosComponent implements OnInit {
+
+  @Input() mostrarUltimaColumna: boolean = true;
  
   productos: Producto[] = [];
+
+  @Output() productoSeleccionado = new EventEmitter<any>();
   
   constructor(private productoService: ServicioProductoService) {}
 
@@ -25,7 +29,9 @@ export class ProductosComponent implements OnInit {
     this.productos = this.productoService.getProductos();
   }
   
-
+  seleccionarProducto(producto: any): void {
+    this.productoSeleccionado.emit(producto);
+  }
 
 
   modificarUnidades(index: number, cantidad: number) {

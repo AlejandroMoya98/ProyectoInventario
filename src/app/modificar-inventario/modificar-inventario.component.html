@@ -8,7 +8,7 @@
     </div>
 
     <!-- Mostrar lista completa de productos -->
-  <ul class="list-group">
+  <!-- <ul class="list-group">
     <li 
       *ngFor="let producto of productos" 
       (click)="seleccionarProducto(producto)" 
@@ -19,7 +19,9 @@
       <span>{{ producto.precio | currency:'EUR' }}</span>
       <span>{{ producto.cantidadProducto }}</span>
     </li>
-  </ul>
+  </ul>  -->
+
+  <app-productos [mostrarUltimaColumna]="false" (productoSeleccionado)="onProductoSeleccionado($event)"></app-productos>
   
     <!-- Mostrar el producto encontrado -->
     <div *ngIf="productoSeleccionado" class="mt-3">

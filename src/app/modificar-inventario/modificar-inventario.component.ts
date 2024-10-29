@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ServicioProductoService } from '../servicio-producto.service';
+import { ProductosComponent } from '../productos/productos.component';
 
 @Component({
   selector: 'app-modificar-inventario',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, ProductosComponent],
   templateUrl: './modificar-inventario.component.html',
   styleUrls: ['./modificar-inventario.component.css']
 })
@@ -27,6 +28,10 @@ export class ModificarInventarioComponent implements OnInit {
   }
 
   seleccionarProducto(producto: any): void {
+    this.productoSeleccionado = producto;
+  }
+
+  onProductoSeleccionado(producto: any): void {
     this.productoSeleccionado = producto;
   }
 
