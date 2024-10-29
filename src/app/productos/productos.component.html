@@ -1,24 +1,34 @@
 <div class="container mt-4">
   <h4 class="text-center text-primary">Lista de Productos</h4>
-  <ul class="list-group mb-3">
-    <li class="list-group-item d-flex justify-content-between align-items-center bg-primary text-white">
-      <span class="fw-bold w-20">Tipo Producto</span>
-      <span class="fw-bold w-20">Precio</span>
-      <span class="fw-bold w-20">Cantidad</span>
-      <span class="fw-bold w-20">Valor total</span>
-      <span class="fw-bold w-20">Añadir/Eliminar unidades</span>
-    </li>
-  </ul>
-  <ul class="list-group">
-    <li *ngFor="let producto of productos; let i = index" class="list-group-item d-flex justify-content-between align-items-center">
-      <span class="w-20">{{ producto.tipoProducto }}</span>
-      <span class="w-20">{{ producto.precio | currency:'EUR' }}</span>
-      <span class="w-20">{{ producto.cantidadProducto }}</span>
-      <span class="w-20">{{ producto.precio * producto.cantidadProducto | currency:'EUR' }}</span>
-      <span class="w-20">
-        <button class="btn btn-sm btn-outline-danger" (click)="modificarUnidades(i, -1)">-</button>
-        <button class="btn btn-sm btn-outline-success" (click)="modificarUnidades(i, +1)">+</button>
-      </span>
-    </li>
-  </ul>
+  
+  <table class="table table-bordered text-center">
+      <thead>
+          <tr class="text-white text-center bg-primary">
+              <th>Tipo Producto</th>
+              <th>Precio</th>
+              <th>Cantidad</th>
+              <th>Valor total</th>
+              <th>Añadir/Eliminar unidades</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let producto of productos ; let i = index" >
+              <td>{{ producto.tipoProducto }}</td>
+              <td>{{ producto.precio | currency: 'EUR' }}</td>
+              <td>{{ producto.cantidadProducto }}</td>
+              <td>{{ producto.precio * producto.cantidadProducto | currency: 'EUR' }}</td>
+              <td>
+                <div class="d-flex justify-content-center">
+                   <button class="btn btn-danger btn-md me-2" (click)="modificarUnidades(i, -1)">-</button>
+                   <button class="btn btn-success btn-md" (click)="modificarUnidades(i, 1)">+</button>
+                </div>
+              </td>
+          </tr>
+      </tbody>
+  </table>
 </div>
+
+
+
+
+
