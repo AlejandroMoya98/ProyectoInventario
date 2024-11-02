@@ -1,4 +1,4 @@
-import { Component , Input, Output, EventEmitter, OnInit} from '@angular/core';
+import { Component , Input, Output, EventEmitter, OnInit, SimpleChanges, OnChanges} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ServicioProductoService } from '../servicio-producto.service';
 
@@ -13,24 +13,36 @@ interface Producto {
   standalone: true,
   imports: [CommonModule],
   templateUrl: './productos.component.html',
-  styleUrl: './productos.component.css'
+  styleUrls: ['./productos.component.css']
 })
-export class ProductosComponent implements OnInit {
+export class ProductosComponent implements OnInit, OnChanges {
 
   @Input() mostrarUltimaColumna: boolean = true;
+  @Input() productoSeleccionadoExternamente: Producto | null = null; // Producto seleccionado externamente
  
   productos: Producto[] = [];
+  productoSeleccionadoLocal: Producto | null = null;
 
-  @Output() productoSeleccionado = new EventEmitter<any>();
+
+  @Output() productoSeleccionadoEvent = new EventEmitter<Producto>();
   
   constructor(private productoService: ServicioProductoService) {}
 
   ngOnInit(): void {
     this.productos = this.productoService.getProductos();
   }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['productoSeleccionadoExternamente']) {
+      this.productoSeleccionadoLocal = this.productoSeleccionadoExternamente;
+    }
+
+  }
   
-  seleccionarProducto(producto: any): void {
-    this.productoSeleccionado.emit(producto);
+  seleccionarProducto(producto: Producto): void {
+    
+    this.productoSeleccionadoLocal = producto;
+    this.productoSeleccionadoEvent.emit(producto);  // Emite al componente padre
   }
 
 

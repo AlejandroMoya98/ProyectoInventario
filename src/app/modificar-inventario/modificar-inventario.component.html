@@ -21,7 +21,7 @@
     </li>
   </ul>  -->
 
-  <app-productos [mostrarUltimaColumna]="false" (productoSeleccionado)="onProductoSeleccionado($event)"></app-productos>
+  <app-productos [mostrarUltimaColumna]="false" [productoSeleccionadoExternamente]="productoSeleccionado" (productoSeleccionadoEvent)="onProductoSeleccionado($event)"></app-productos>
   
     <!-- Mostrar el producto encontrado -->
     <div *ngIf="productoSeleccionado" class="mt-3">

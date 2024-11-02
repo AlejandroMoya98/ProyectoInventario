@@ -4,6 +4,13 @@ import { CommonModule } from '@angular/common';
 import { ServicioProductoService } from '../servicio-producto.service';
 import { ProductosComponent } from '../productos/productos.component';
 
+
+interface Producto {
+  tipoProducto: string;
+  precio: number;
+  cantidadProducto: number;
+}
+
 @Component({
   selector: 'app-modificar-inventario',
   standalone: true,
@@ -14,7 +21,7 @@ import { ProductosComponent } from '../productos/productos.component';
 export class ModificarInventarioComponent implements OnInit {
 
   productos: any[] = [];
-  productoSeleccionado: any = null;
+  productoSeleccionado: Producto | null = null;
   cantidadModificar: number = 0;
   terminoBusqueda: string = '';
 
@@ -27,9 +34,9 @@ export class ModificarInventarioComponent implements OnInit {
     this.productos = this.productoService.getProductos();
   }
 
-  seleccionarProducto(producto: any): void {
+  /*seleccionarProducto(producto: any): void {
     this.productoSeleccionado = producto;
-  }
+  } */
 
   onProductoSeleccionado(producto: any): void {
     this.productoSeleccionado = producto;
