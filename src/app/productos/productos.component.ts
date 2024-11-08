@@ -1,12 +1,14 @@
 import { Component , Input, Output, EventEmitter, OnInit, SimpleChanges, OnChanges} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ServicioProductoService } from '../servicio-producto.service';
+import { Producto } from '../models/producto.model';
 
-interface Producto {
+
+/*interface Producto {
   tipoProducto: string;
   precio: number;
   cantidadProducto: number;
-}
+}*/
 
 @Component({
   selector: 'app-productos',
@@ -28,8 +30,8 @@ export class ProductosComponent implements OnInit, OnChanges {
   
   constructor(private productoService: ServicioProductoService) {}
 
-  ngOnInit(): void {
-    this.productos = this.productoService.getProductos();
+  ngOnInit() {
+    this.cargarProductos();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -37,6 +39,12 @@ export class ProductosComponent implements OnInit, OnChanges {
       this.productoSeleccionadoLocal = this.productoSeleccionadoExternamente;
     }
 
+  }
+
+  cargarProductos() {
+    this.productoService.getProductos().subscribe((productos) => {
+      this.productos = productos;
+    });
   }
   
   seleccionarProducto(producto: Producto): void {
@@ -47,13 +55,17 @@ export class ProductosComponent implements OnInit, OnChanges {
 
 
   modificarUnidades(index: number, cantidad: number) {
-    try {
-      this.productoService.modificarUnidades(index, cantidad);
-    } catch (error : any) {
-      alert(error.message);  // Muestra una alerta si intentas eliminar más unidades de las disponibles.
+    const producto = this.productos[index];
+    const nuevaCantidad = producto.cantidadProducto + cantidad;
+    if (nuevaCantidad < 0) {
+      alert("No se pueden eliminar más unidades de las disponibles.");
+      return;
     }
 
-}
+    this.productoService.modificarUnidades(producto.id!, nuevaCantidad).subscribe(() => {
+      producto.cantidadProducto = nuevaCantidad;
+    });
+  }
 }
 
 /*<p style="text-align: center; font-weight: bold;">Lista de productos</p>

@@ -1,38 +1,45 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Producto } from './models/producto.model';
 
-interface Producto {
+/*interface Producto {
+  id?: number;
   tipoProducto: string;
   precio: number;
   cantidadProducto: number;
-}
+}*/
 
 @Injectable({
   providedIn: 'root'
 })
 export class ServicioProductoService {
 
-  //constructor() { }
+  private apiUrl = 'http://localhost:3000/api/productos';  // URL de la API
 
-  private productos: Producto[] = [];
+  constructor(private http: HttpClient) { }
 
-  getProductos(): Producto[]  {
-    return this.productos;
+  //private productos: Producto[] = [];
+
+  getProductos(): Observable<Producto[]> {
+    return this.http.get<Producto[]>(this.apiUrl);
   }
 
-  agregarProducto(producto: Producto) {
-    this.productos.push(producto);
+  agregarProducto(producto: Producto): Observable<Producto> {
+    return this.http.post<Producto>(this.apiUrl, producto);
   }
 
-  modificarUnidades(index: number, cantidad: number) {
-    if (this.productos[index].cantidadProducto + cantidad >= 0) {
-      this.productos[index].cantidadProducto += cantidad;
-    } else {
-      throw new Error('No se pueden eliminar más unidades de las disponibles.');
-    }
+  modificarUnidades(id: number, cantidad: number): Observable<any> {
+    return this.http.patch(`${this.apiUrl}/${id}`, { cantidad }); 
   }
 
-  buscarProducto(termino: string): Producto[] {
-    return this.productos.filter(p => p.tipoProducto.toLowerCase().includes(termino.toLowerCase()));
+  eliminarProducto(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/${id}`);
+  }
+
+  buscarProducto(termino: string): Observable<Producto[]> {
+    const url = `${this.apiUrl}?tipoProducto_like=${termino}`;
+    return this.http.get<Producto[]>(url);
   }
 
 }

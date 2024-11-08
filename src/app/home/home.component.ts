@@ -1,23 +1,23 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule, RouterOutlet } from '@angular/router';
+//import { RouterModule, RouterOutlet } from '@angular/router';
 import { ProductosComponent } from '../productos/productos.component';
 import { ProductoComponent } from '../producto/producto.component';
 import { ServicioProductoService } from '../servicio-producto.service';
+import { Producto } from '../models/producto.model';
 
 
-
-interface Producto {
+/*interface Producto {
   tipoProducto: string;
   precio: number;
   cantidadProducto: number;
-}
+}*/
 
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [RouterOutlet, ProductosComponent, CommonModule, ProductoComponent, RouterModule],
+  imports: [ ProductosComponent, CommonModule, ProductoComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -40,7 +40,7 @@ export class HomeComponent {
   constructor(private productoService: ServicioProductoService) {}
 
   agregarProducto(nuevoProducto: Producto) {
-    this.productoService.agregarProducto(nuevoProducto);
+    this.productoService.agregarProducto(nuevoProducto).subscribe();
   }
   
   title = 'Inventario de productos';

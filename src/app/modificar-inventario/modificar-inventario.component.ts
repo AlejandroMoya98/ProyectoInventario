@@ -3,13 +3,13 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ServicioProductoService } from '../servicio-producto.service';
 import { ProductosComponent } from '../productos/productos.component';
+import { Producto } from '../models/producto.model';
 
-
-interface Producto {
+/*interface Producto {
   tipoProducto: string;
   precio: number;
   cantidadProducto: number;
-}
+}*/
 
 @Component({
   selector: 'app-modificar-inventario',
@@ -20,7 +20,7 @@ interface Producto {
 })
 export class ModificarInventarioComponent implements OnInit {
 
-  productos: any[] = [];
+  productos: Producto[] = [];
   productoSeleccionado: Producto | null = null;
   cantidadModificar: number = 0;
   terminoBusqueda: string = '';
@@ -30,8 +30,13 @@ export class ModificarInventarioComponent implements OnInit {
 
   // El código que utiliza el servicio debe estar en ngOnInit
   ngOnInit(): void {
-    // Inicializamos los productos cuando el componente ya está listo
-    this.productos = this.productoService.getProductos();
+    this.cargarProductos();
+  }
+
+  cargarProductos() {
+    this.productoService.getProductos().subscribe((productos) => {
+      this.productos = productos;
+    });
   }
 
   /*seleccionarProducto(producto: any): void {
@@ -44,8 +49,9 @@ export class ModificarInventarioComponent implements OnInit {
 
   // Método para buscar un producto por su término de búsqueda
   buscarProducto(): void {
-    const resultados = this.productoService.buscarProducto(this.terminoBusqueda);
-    this.productoSeleccionado = resultados.length ? resultados[0] : null;
+    this.productoService.buscarProducto(this.terminoBusqueda).subscribe((resultados) => {
+      this.productoSeleccionado = resultados.length ? resultados[0] : null;
+    });
   }
 
   validarCantidad() {
@@ -56,12 +62,17 @@ export class ModificarInventarioComponent implements OnInit {
 
   // Método para modificar la cantidad de productos
   modificarCantidad(cantidad: number): void {
-    try {
-      const index = this.productos.indexOf(this.productoSeleccionado);
-      this.productoService.modificarUnidades(index, cantidad);
-      this.cantidadModificar = 0;  // Resetear el campo de cantidad después de modificar
-    } catch (error : any) {
-      alert(error.message);  // Mensaje de error si se intenta eliminar más de lo disponible
+    if (this.productoSeleccionado) {
+      const nuevaCantidad = this.productoSeleccionado.cantidadProducto + cantidad;
+      if (nuevaCantidad < 0) {
+        alert("No se pueden eliminar más unidades de las disponibles.");
+        return;
+      }
+
+      this.productoService.modificarUnidades(this.productoSeleccionado.id!, nuevaCantidad).subscribe(() => {
+        this.productoSeleccionado!.cantidadProducto = nuevaCantidad;
+        this.cantidadModificar = 0;
+      });
     }
   }
 }
