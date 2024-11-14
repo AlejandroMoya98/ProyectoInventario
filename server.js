@@ -78,7 +78,8 @@ app.post('/api/productos', (req, res) => {
 
 app.patch('/api/productos/:id', (req, res) => {
     const productoId = req.params.id;
-    const cantidadModificada = req.body.cantidadProducto;
+    const cantidadModificada = req.body.cantidad;
+
   
     db.query('SELECT cantidadProducto FROM productos WHERE id = ?', [productoId], (err, results) => {
       if (err) {

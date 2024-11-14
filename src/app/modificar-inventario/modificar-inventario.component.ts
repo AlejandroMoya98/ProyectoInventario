@@ -69,7 +69,7 @@ export class ModificarInventarioComponent implements OnInit {
         return;
       }
 
-      this.productoService.modificarUnidades(this.productoSeleccionado.id!, nuevaCantidad).subscribe(() => {
+      this.productoService.modificarUnidades(this.productoSeleccionado.id!, cantidad).subscribe(() => {
         this.productoSeleccionado!.cantidadProducto = nuevaCantidad;
         this.cantidadModificar = 0;
       });

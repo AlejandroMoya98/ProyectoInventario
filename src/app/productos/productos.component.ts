@@ -62,7 +62,7 @@ export class ProductosComponent implements OnInit, OnChanges {
       return;
     }
 
-    this.productoService.modificarUnidades(producto.id!, nuevaCantidad).subscribe(() => {
+    this.productoService.modificarUnidades(producto.id!, cantidad).subscribe(() => {
       producto.cantidadProducto = nuevaCantidad;
     });
   }
