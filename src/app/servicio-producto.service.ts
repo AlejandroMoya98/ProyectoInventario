@@ -52,9 +52,16 @@ export class ServicioProductoService {
     );
   }
 
+  // Método para modificar el tipo de producto y precio
+  modificarProducto(producto: Producto): Observable<any> {
+    return this.http.put(`${this.apiUrl}/${producto.id}`, producto).pipe(
+      tap(() => this.cargarProductos())
+    );
+  }
+
   eliminarProducto(id: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}/${id}`).pipe(
-      tap(() => this.cargarProductos()) // Actualizar la lista después de eliminar un producto
+      tap(() => this.cargarProductos())
     );
   }
 

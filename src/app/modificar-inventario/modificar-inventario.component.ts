@@ -24,6 +24,7 @@ export class ModificarInventarioComponent implements OnInit {
   productoSeleccionado: Producto | null = null;
   cantidadModificar: number = 0;
   terminoBusqueda: string = '';
+  confirmarEliminacion: boolean = false; 
 
   // Inyección del servicio en el constructor
   constructor(private productoService: ServicioProductoService) {}
@@ -72,6 +73,26 @@ export class ModificarInventarioComponent implements OnInit {
       this.productoService.modificarUnidades(this.productoSeleccionado.id!, cantidad).subscribe(() => {
         this.productoSeleccionado!.cantidadProducto = nuevaCantidad;
         this.cantidadModificar = 0;
+      });
+    }
+  }
+   // Método para modificar el tipo de producto y precio
+   modificarProducto(): void {
+    if (this.productoSeleccionado) {
+      this.productoService.modificarProducto(this.productoSeleccionado).subscribe(() => {
+        alert("Producto modificado con éxito.");
+      });
+    }
+  }
+
+  // Método para eliminar el producto
+  eliminarProducto(): void {
+    if (this.productoSeleccionado) {
+      this.productoService.eliminarProducto(this.productoSeleccionado.id!).subscribe(() => {
+        alert("Producto eliminado con éxito.");
+        this.productoSeleccionado = null;
+        this.confirmarEliminacion = false;
+        this.cargarProductos();
       });
     }
   }
