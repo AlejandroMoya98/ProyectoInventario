@@ -12,6 +12,21 @@
           <a class="nav-link text-primary" routerLink="/modificar-inventario" routerLinkActive="active">Modificar Inventario</a>
         </li>
       </ul>
+      <!-- Botón Login/Logout -->
+      <div>
+        <button 
+          *ngIf="!usuarioLogueado" 
+          (click)="irALogin()" 
+          class="btn btn-primary btn-sm fw-bold px-4 me-2">
+          Login
+        </button>
+        <button 
+          *ngIf="usuarioLogueado" 
+          (click)="cerrarSesion()" 
+          class="btn btn-danger btn-sm fw-bold px-4">
+          Logout
+        </button>
+      </div>
     </div>
   </div>
 </nav>
