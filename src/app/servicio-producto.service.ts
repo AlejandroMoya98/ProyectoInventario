@@ -66,7 +66,7 @@ export class ServicioProductoService {
   }
 
   buscarProducto(termino: string): Observable<Producto[]> {
-    const url = `${this.apiUrl}?tipoProducto_like=${termino}`;
+    const url = `${this.apiUrl}?tipoProducto=${termino}`;
     return this.http.get<Producto[]>(url);
   }
 

@@ -8,18 +8,7 @@
     </div>
 
     <!-- Mostrar lista completa de productos -->
-  <!-- <ul class="list-group">
-    <li 
-      *ngFor="let producto of productos" 
-      (click)="seleccionarProducto(producto)" 
-      class="list-group-item d-flex justify-content-between align-items-center" 
-      [class.active]="producto === productoSeleccionado"
-      style="cursor: pointer;">
-      <span>{{ producto.tipoProducto }}</span>
-      <span>{{ producto.precio | currency:'EUR' }}</span>
-      <span>{{ producto.cantidadProducto }}</span>
-    </li>
-  </ul>  -->
+  
 
   <app-productos [mostrarUltimaColumna]="false" [productoSeleccionadoExternamente]="productoSeleccionado" (productoSeleccionadoEvent)="onProductoSeleccionado($event)"></app-productos>
   

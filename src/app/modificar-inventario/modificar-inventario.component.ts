@@ -5,11 +5,7 @@ import { ServicioProductoService } from '../servicio-producto.service';
 import { ProductosComponent } from '../productos/productos.component';
 import { Producto } from '../models/producto.model';
 
-/*interface Producto {
-  tipoProducto: string;
-  precio: number;
-  cantidadProducto: number;
-}*/
+
 
 @Component({
   selector: 'app-modificar-inventario',
@@ -40,20 +36,30 @@ export class ModificarInventarioComponent implements OnInit {
     });
   }
 
-  /*seleccionarProducto(producto: any): void {
-    this.productoSeleccionado = producto;
-  } */
+  
 
   onProductoSeleccionado(producto: any): void {
     this.productoSeleccionado = producto;
   }
 
-  // Método para buscar un producto por su término de búsqueda
-  buscarProducto(): void {
-    this.productoService.buscarProducto(this.terminoBusqueda).subscribe((resultados) => {
+ 
+ buscarProducto(): void {
+  this.productoService.buscarProducto(this.terminoBusqueda).subscribe({
+    next: (resultados) => {
+      console.log('Resultados de la búsqueda:', resultados); 
       this.productoSeleccionado = resultados.length ? resultados[0] : null;
-    });
-  }
+      if (!resultados.length) {
+        alert("No se encontró ningún producto con ese término.");
+      }
+    },
+    error: (err) => {
+      console.error("Error al buscar producto:", err);
+      alert("Ocurrió un error al buscar el producto. Intente nuevamente.");
+    }
+  });
+}
+
+
 
   validarCantidad() {
     if (this.cantidadModificar < 1 || !Number.isInteger(this.cantidadModificar)) {

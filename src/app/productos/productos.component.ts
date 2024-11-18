@@ -4,11 +4,7 @@ import { ServicioProductoService } from '../servicio-producto.service';
 import { Producto } from '../models/producto.model';
 
 
-/*interface Producto {
-  tipoProducto: string;
-  precio: number;
-  cantidadProducto: number;
-}*/
+
 
 @Component({
   selector: 'app-productos',
@@ -68,9 +64,3 @@ export class ProductosComponent implements OnInit, OnChanges {
   }
 }
 
-/*<p style="text-align: center; font-weight: bold;">Lista de productos</p>
-<ul>
-    <li *ngFor="let producto of productos">
-      {{ producto.tipoProducto }} - Precio: {{ producto.precio }} - Cantidad: {{ producto.cantidadProducto }} - Coste: {{ coste(producto) }}
-    </li>
-</ul>*/

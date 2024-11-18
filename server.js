@@ -24,17 +24,29 @@ db.connect((err) => {
 
 // Obtener todos los productos
 app.get('/api/productos', (req, res) => {
-    const sql = 'SELECT * FROM productos';
-  
-    db.query(sql, (error, results) => {
-      if (error) {
-        console.error('Error al obtener productos:', error);
-        res.status(500).send('Error al obtener productos');
-      } else {
-        res.json(results);  // Enviar los productos como JSON
-      }
-    });
+  const { tipoProducto } = req.query; // Leer el parámetro de búsqueda
+
+  let sql = 'SELECT * FROM productos'; // Consulta base
+  const params = [];
+
+  // Si se proporciona un tipoProducto, añade una cláusula WHERE
+  if (tipoProducto) {
+    sql += ' WHERE tipoProducto = ?';
+    params.push(tipoProducto); // Evitar inyección SQL
+  }
+
+  // Ejecutar la consulta
+  db.query(sql, params, (err, results) => {
+    if (err) {
+      console.error('Error al obtener los productos:', err);
+      return res.status(500).json({ error: 'Error al obtener los productos' });
+    }
+
+    // Enviar resultados
+    res.json(results);
   });
+});
+
 
 // Obtener un producto específico por ID
 app.get('/api/productos/:id', (req, res) => {
@@ -53,6 +65,8 @@ app.get('/api/productos/:id', (req, res) => {
     }
   });
 });
+
+
 
 // Agregar un nuevo producto
 app.post('/api/productos', (req, res) => {
