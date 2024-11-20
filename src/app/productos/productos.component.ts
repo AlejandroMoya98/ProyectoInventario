@@ -17,8 +17,10 @@ export class ProductosComponent implements OnInit, OnChanges {
 
   @Input() mostrarUltimaColumna: boolean = true;
   @Input() productoSeleccionadoExternamente: Producto | null = null; // Producto seleccionado externamente
+  @Input() productos: Producto[] = [];
+
  
-  productos: Producto[] = [];
+  
   productoSeleccionadoLocal: Producto | null = null;
 
 

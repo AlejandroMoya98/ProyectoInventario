@@ -4,13 +4,6 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import { Producto } from './models/producto.model';
 import { tap } from 'rxjs/operators';
 
-/*interface Producto {
-  id?: number;
-  tipoProducto: string;
-  precio: number;
-  cantidadProducto: number;
-}*/
-
 @Injectable({
   providedIn: 'root'
 })
@@ -32,9 +25,6 @@ export class ServicioProductoService {
     error: (error) => console.error('Error al cargar productos:', error)
   });
   }
-
-
-  //private productos: Producto[] = [];
 
   getProductos(): Observable<Producto[]> {
     return this.productos$; // Retornar el observable de productos

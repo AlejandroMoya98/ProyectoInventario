@@ -47,6 +47,7 @@ export class ModificarInventarioComponent implements OnInit {
   this.productoService.buscarProducto(this.terminoBusqueda).subscribe({
     next: (resultados) => {
       console.log('Resultados de la búsqueda:', resultados); 
+      this.productos = resultados; 
       this.productoSeleccionado = resultados.length ? resultados[0] : null;
       if (!resultados.length) {
         alert("No se encontró ningún producto con ese término.");
@@ -57,9 +58,13 @@ export class ModificarInventarioComponent implements OnInit {
       alert("Ocurrió un error al buscar el producto. Intente nuevamente.");
     }
   });
+ }
+
+ resetearBusqueda(): void {
+  this.terminoBusqueda = ''; 
+  this.cargarProductos(); 
+  this.productoSeleccionado = null; 
 }
-
-
 
   validarCantidad() {
     if (this.cantidadModificar < 1 || !Number.isInteger(this.cantidadModificar)) {
