@@ -4,8 +4,6 @@ import { ServicioProductoService } from '../servicio-producto.service';
 import { Producto } from '../models/producto.model';
 
 
-
-
 @Component({
   selector: 'app-productos',
   standalone: true,
@@ -16,7 +14,7 @@ import { Producto } from '../models/producto.model';
 export class ProductosComponent implements OnInit, OnChanges {
 
   @Input() mostrarUltimaColumna: boolean = true;
-  @Input() productoSeleccionadoExternamente: Producto | null = null; // Producto seleccionado externamente
+  @Input() productoSeleccionadoExternamente: Producto | null = null; 
   @Input() productos: Producto[] = [];
 
  
@@ -48,7 +46,7 @@ export class ProductosComponent implements OnInit, OnChanges {
   seleccionarProducto(producto: Producto): void {
     
     this.productoSeleccionadoLocal = producto;
-    this.productoSeleccionadoEvent.emit(producto);  // Emite al componente padre
+    this.productoSeleccionadoEvent.emit(producto);  
   }
 
 

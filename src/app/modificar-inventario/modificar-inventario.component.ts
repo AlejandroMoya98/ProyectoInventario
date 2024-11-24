@@ -31,8 +31,9 @@ export class ModificarInventarioComponent implements OnInit {
   }
 
   cargarProductos() {
-    this.productoService.getProductos().subscribe((productos) => {
-      this.productos = productos;
+    this.productoService.getProductos().subscribe({
+      next: (productos) => (this.productos = productos),
+      error: (error) => console.error('Error al cargar productos:', error),
     });
   }
 

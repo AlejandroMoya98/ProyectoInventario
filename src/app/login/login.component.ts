@@ -21,7 +21,7 @@ export class LoginComponent {
     const logueado = this.authService.iniciarSesion(this.username, this.password);
     if (logueado) {
       alert('Inicio de sesión exitoso.');
-      this.router.navigate(['/home']); // Redirige al home
+      this.router.navigate(['/home']); 
     } else {
       alert('Usuario o contraseña incorrectos.');
     }

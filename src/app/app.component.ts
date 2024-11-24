@@ -38,7 +38,6 @@ export class AppComponent {
   cerrarSesion() {
     this.authService.cerrarSesion(); // Actualiza el estado de autenticación
     alert('Has cerrado sesión con éxito.');
-    //this.router.navigate(['/home']); // Redirige al Home tras cerrar sesión
   }
   
 }

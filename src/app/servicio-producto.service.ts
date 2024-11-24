@@ -22,7 +22,10 @@ export class ServicioProductoService {
     // Método privado para cargar los productos y actualizar el BehaviorSubject
   this.http.get<Producto[]>(this.apiUrl).subscribe({
     next: (productos) => this.productosSubject.next(productos),
-    error: (error) => console.error('Error al cargar productos:', error)
+    error: (error) => {
+      console.error('Error al cargar productos:', error)
+      alert('No se pudieron cargar los productos. Intenta más tarde.');
+    } 
   });
   }
 

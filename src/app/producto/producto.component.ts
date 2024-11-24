@@ -4,16 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { ServicioProductoService } from '../servicio-producto.service';
 import { Producto } from '../models/producto.model';
 
-//(ngSubmit)="AgregarProducto()
-//*ngIf="productos_en_inventario"
-//<button type ="submit" class ="btn btn-primary" >Agregar Producto</button>
-
-/*interface Producto {
-  tipoProducto: string;
-  precio: number;
-  cantidadProducto: number;
-}*/
-
 @Component({
   selector: 'app-producto',
   standalone: true,

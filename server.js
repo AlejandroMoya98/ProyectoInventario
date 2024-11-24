@@ -1,6 +1,6 @@
 const express = require('express');
 const mysql = require('mysql2');
-const cors = require('cors'); // Permite acceso desde tu app Angular
+const cors = require('cors'); 
 const app = express();
 
 app.use(cors());
@@ -26,13 +26,13 @@ db.connect((err) => {
 app.get('/api/productos', (req, res) => {
   const { tipoProducto } = req.query; // Leer el parámetro de búsqueda
 
-  let sql = 'SELECT * FROM productos'; // Consulta base
+  let sql = 'SELECT * FROM productos'; 
   const params = [];
 
   // Si se proporciona un tipoProducto, añade una cláusula WHERE
   if (tipoProducto) {
     sql += ' WHERE tipoProducto = ?';
-    params.push(tipoProducto); // Evitar inyección SQL
+    params.push(tipoProducto); 
   }
 
   // Ejecutar la consulta
